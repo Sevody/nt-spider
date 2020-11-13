@@ -1,0 +1,16 @@
+node_modules
+npm-debug.log
+error.log
+combined.log
+package-lock.json
+.vscode
+.idea
+.DS_Store
+lib/config/app.json
+lib/config/config.js
+yarn-error.log
+tmp
+*.swp
+*.iml
+coverage
+.env
