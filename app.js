@@ -1,10 +1,7 @@
-import cron from 'cron';
-import baiduTask from './jobs/baidu.js';
-import _5chTask from './jobs/5ch.js';
+const cron = require('cron');
+const genshinn = require('./jobs/genshinn');
 
 const { CronJob } = cron;
-const { crawlBaiduTitle } = baiduTask;
-const { crawl5channel } = _5chTask;
 
 /*
 * * * * * *
@@ -18,12 +15,11 @@ second ( optional )
 */
 
 const job = new CronJob(
-  '* * * * * *',
+  '1 * * * * *',
   (() => {
-    console.log('You will see this message every second');
-    crawlBaiduTitle();
+    console.log('You will see this message every minute');
+    genshinn();
   }),
 );
 
-// job.start();
-crawl5channel();
+job.start();
