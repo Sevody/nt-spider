@@ -1,18 +1,27 @@
 const got = require('got');
-const save = require('../services/create-rss-article');
+const config = require('../config').value;
+const logger = require('../utils/logger');
+const rssChannelService = require('../services/rss-channel');
+const rssItemService = require('../services/rss-item');
+const CONSTANTS = require('./constants');
 
-const GENSHINN_CHANNEL_ID = 1;
-
-async function run () {
+async function run() {
     try {
-        const { body } = await got.get('http://127.0.0.1:1200/yuanshen');
-        const result = await save(GENSHINN_CHANNEL_ID, JSON.parse(body));
-        if (result) {
-            console.log('save rss article success');
-        }
+        logger.info('start genshinn jobs');
+        const channels = await rssChannelService.findAll(CONSTANTS.GENSHINN_SOURCE_ID);
+        const tasks = channels.map(async (channel) => await generateTask(channel.id, `${config.rssHost}${channel.atom_link}`));
+        await Promise.all(tasks);
+        logger.info('finish genshinn jobs');
     } catch (e) {
-        console.log('error: ', e);
+        logger.error('genshinn job error: ' + e);
     }
 }
 
-module.exports = run;
+async function generateTask(channelId, rssUrl) {
+    const { body } = await got.get(rssUrl);
+    await rssItemService.createIfNeeded(channelId, JSON.parse(body));
+}
+
+module.exports = {
+    run
+};

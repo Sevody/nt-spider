@@ -1,5 +1,6 @@
 const cron = require('cron');
 const genshinn = require('./jobs/genshinn');
+const logger = require('./utils/logger');
 
 const { CronJob } = cron;
 
@@ -17,9 +18,11 @@ second ( optional )
 const job = new CronJob(
   '1 * * * * *',
   (() => {
-    console.log('You will see this message every minute');
-    genshinn();
+    logger.info('You will see this message every minute');
+    genshinn.run();
   }),
 );
+
+// genshinn.run();
 
 job.start();

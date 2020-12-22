@@ -6,10 +6,10 @@ class RSSItem extends Model {
         RSSItem.init({
             title: Sequelize.STRING,
             description: Sequelize.STRING,
-            pubDate: Sequelize.DATE(6),
+            pub_date: Sequelize.DATE(6),
             guid: Sequelize.STRING,
             link: Sequelize.STRING,
-            aid: Sequelize.INTEGER,
+            channel_id: Sequelize.INTEGER,
             created_at: Sequelize.DATE(6),
             updated_at: Sequelize.DATE(6),
         }, {

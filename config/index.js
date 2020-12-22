@@ -14,6 +14,9 @@ const calculateValue = () => {
             password: envs.DB_PASSWORD,
             database: envs.DB_DATABASE,
         },
+        rssHost: envs.RSS_HOST,
+        loggerLevel: envs.LOGGER_LEVEL || 'info',
+        noLogfiles: envs.NO_LOGFILES,
     };
 };
 calculateValue();
