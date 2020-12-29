@@ -7,7 +7,7 @@ class RSSChannel extends Model {
             title: Sequelize.STRING,
             atom_link: Sequelize.STRING,
             description: Sequelize.STRING,
-            language: Sequelize.ENUM('zh-cn', 'ja-jp'),
+            language: Sequelize.ENUM('zh-CN', 'ja-JP'),
             last_build_date: Sequelize.DATE(6),
             created_at: Sequelize.DATE(6),
             updated_at: Sequelize.DATE(6),

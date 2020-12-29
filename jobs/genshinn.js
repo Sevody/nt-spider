@@ -3,7 +3,7 @@ const config = require('../config').value;
 const logger = require('../utils/logger');
 const rssChannelService = require('../services/rss-channel');
 const rssItemService = require('../services/rss-item');
-const CONSTANTS = require('./constants');
+const CONSTANTS = require('../constants/channel-source');
 
 async function run() {
     try {
