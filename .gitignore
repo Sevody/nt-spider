@@ -13,4 +13,4 @@ tmp
 *.swp
 *.iml
 coverage
-.env
+*.env
